@@ -5,10 +5,10 @@ from deep_translator import GoogleTranslator
 import base64
 
 # ✅ 환경변수 로드
-GOOGLE_API_KEY= st.secrets("GOOGLE_API_KEY")
-GOOGLE_TRANSLATE_API_KEY= st.secrets("GOOGLE_TRANSLATE_API_KEY")
-OPENAI_API_KEY= st.secrets("OPENAI_API_KEY")
-PASTEBIN_API_KEY= st.secrets("PASTEBIN_API_KEY")
+GOOGLE_API_KEY= st.secrets["GOOGLE_API_KEY"]
+GOOGLE_TRANSLATE_API_KEY= st.secrets["GOOGLE_TRANSLATE_API_KEY"]
+OPENAI_API_KEY= st.secrets["OPENAI_API_KEY"]
+PASTEBIN_API_KEY= st.secrets["PASTEBIN_API_KEY"]
 
 # ✅ 기본 설정
 st.set_page_config(page_title="PlaceLog.AI", layout="wide")
