@@ -1,8 +1,10 @@
 import streamlit as st
 import requests
 import os
-from deep_translator import GoogleTranslator
 import base64
+import openai
+from openai import OpenAI
+from deep_translator import GoogleTranslator
 
 # ✅ 환경변수 로드
 GOOGLE_API_KEY= st.secrets["GOOGLE_API_KEY"]
@@ -91,7 +93,7 @@ def translate_reviews(reviews):
     except:
         return [{"text": "번역 실패"} for _ in range(5)]
 
-
+client = OpenAI(api_key=OPENAI_API_KEY)
 # ✅ 공간 개요 생성
 
 def generate_summary(place):
