@@ -101,32 +101,44 @@ def generate_summary(place):
         f"주소: {place['formatted_address']}\n"
         f"이 장소는 어떤 느낌의 공간인지, 분위기, 주변 특징 등을 고려해서 감성적이고 풍부한 한국어 설명을 작성해 주세요.\n"
     )
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=100
-    )
+  
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=100
+        )
     
-    return response.choices[0].message['content'].strip()
+        return response.choices[0].message['content'].strip()
+  
+    except Exception as e:
+        st.error(f"공간 개요를 불러오는 중 오류가 발생했습니다: {e}")
+        return "⚠️ 공간 개요 생성 실패"
 
 def generate_similar_places(place):
     import openai
     openai.api_key = OPENAI_API_KEY
     prompt = f"""
-다음 장소와 비슷한 장소를 한국 또는 해외 유명 장소 중에 3곳 추천해 주세요.
+    다음 장소와 비슷한 장소를 한국 또는 해외 유명 장소 중에 3곳 추천해 주세요.
 
-장소 이름: {place['name']}
-주소: {place['formatted_address']}
-설명: {st.session_state.get('summary', '')}
+    장소 이름: {place['name']}
+    주소: {place['formatted_address']}
+    설명: {st.session_state.get('summary', '')}
 
-장소 이름만 굵게 강조해서 3개 추천해주세요.
-"""
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200
-    )
-    return response.choices[0].message['content'].strip()
+    장소 이름만 굵게 강조해서 3개 추천해주세요.
+    """
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=200
+        )
+        return response.choices[0].message['content'].strip()
+
+    except Exception as e:
+        st.error(f"공간 개요를 불러오는 중 오류가 발생했습니다: {e}")
+        return "⚠️ 공간 개요 생성 실패"
 
 # ✅ Pastebin 공유
 def create_paste(content):
