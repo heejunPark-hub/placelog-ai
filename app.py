@@ -93,9 +93,10 @@ def translate_reviews(reviews):
 
 
 # ✅ 공간 개요 생성
+from openai import OpenAI
+client = OpenAI(api_key=OPENAI_API_KEY)
+
 def generate_summary(place):
-    import openai
-    openai.api_key = OPENAI_API_KEY
     prompt = (
         f"장소 이름: {place['name']}\n"
         f"주소: {place['formatted_address']}\n"
@@ -115,9 +116,10 @@ def generate_summary(place):
         st.error(f"공간 개요를 불러오는 중 오류가 발생했습니다: {e}")
         return "⚠️ 공간 개요 생성 실패"
 
+from openai import OpenAI
+client = OpenAI(api_key=OPENAI_API_KEY)
+
 def generate_similar_places(place):
-    import openai
-    openai.api_key = OPENAI_API_KEY
     prompt = f"""
     다음 장소와 비슷한 장소를 한국 또는 해외 유명 장소 중에 3곳 추천해 주세요.
 
