@@ -93,8 +93,6 @@ def translate_reviews(reviews):
 
 
 # ✅ 공간 개요 생성
-from openai import OpenAI
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_summary(place):
     prompt = (
@@ -110,14 +108,11 @@ def generate_summary(place):
             max_tokens=100
         )
     
-        return response.choices[0].message['content'].strip()
+        return response.choices[0].message.content.strip()
   
     except Exception as e:
         st.error(f"공간 개요를 불러오는 중 오류가 발생했습니다: {e}")
         return "⚠️ 공간 개요 생성 실패"
-
-from openai import OpenAI
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_similar_places(place):
     prompt = f"""
@@ -136,7 +131,7 @@ def generate_similar_places(place):
             messages=[{"role": "user", "content": prompt}],
             max_tokens=200
         )
-        return response.choices[0].message['content'].strip()
+        return response.choices[0].message.content.strip()
 
     except Exception as e:
         st.error(f"공간 개요를 불러오는 중 오류가 발생했습니다: {e}")
