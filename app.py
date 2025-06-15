@@ -98,9 +98,13 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_summary(place):
     prompt = (
+        "[장소 설명 요청]\n"
+        "당신은 감성적이고 창의적인 한국 공간 디자이너입니다.\n"
         f"장소 이름: {place['name']}\n"
-        f"주소: {place['formatted_address']}\n"
-        f"이 장소는 어떤 느낌의 공간인지, 분위기, 주변 특징 등을 고려해서 감성적이고 풍부한 한국어 설명을 작성해 주세요.\n"
+        f"주소: {place['formatted_address']}\n\n"
+        "이 장소에 대해 공간의 분위기, 주변 환경, 역사적/문화적 특징 등을 고려해 "
+        "5문장 이상의 서술형으로, 감각적이고 문학적인 한국어로 설명해 주세요.\n"
+        "단순한 정보 나열이 아니라, 독자가 그 공간을 상상할 수 있도록 묘사해 주세요."
     )
   
     try:
