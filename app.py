@@ -102,7 +102,7 @@ def generate_summary(place):
         f"이 장소는 어떤 느낌의 공간인지, 분위기, 주변 특징 등을 고려해서 감성적이고 풍부한 한국어 설명을 작성해 주세요.\n"
     )
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=100
     )
@@ -122,7 +122,7 @@ def generate_similar_places(place):
 장소 이름만 굵게 강조해서 3개 추천해주세요.
 """
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=200
     )
