@@ -104,7 +104,7 @@ def generate_summary(place):
     )
   
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=100
@@ -131,7 +131,7 @@ def generate_similar_places(place):
     """
 
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=200
@@ -221,7 +221,7 @@ if st.session_state.get("analyzed", False) and place_input:
                st.write("사용자 리뷰가 등록되지 않았습니다.")
 
         # ✅ 유사 장소 추천 바로 실행
-        if st.button("🔁 비슷한 공간 찾아보기"):
+        if st.button("🔁 유사한 장소 추천받기"):
             with st.spinner("유사 장소 추천 중..."):
                 try:
                     suggestions = generate_similar_places(place)
@@ -230,7 +230,7 @@ if st.session_state.get("analyzed", False) and place_input:
                     st.session_state["suggestions"] = "⚠️ 추천 실패"
 
         if st.session_state.get("suggestions"):
-           with st.expander("🧭 유사한 장소 추천 보기"):
+           with st.expander("🧭 추천 결과 보기"):
                st.write(st.session_state["suggestions"])
 
         # ✅ 결과 저장 및 공유 버튼 클릭 시 바로 처리
