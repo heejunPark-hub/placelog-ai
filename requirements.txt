@@ -2,5 +2,5 @@ streamlit
 requests
 python-dotenv
 deep-translator
-openai
+openai>=1.3.5
 Pillow
